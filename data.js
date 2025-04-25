@@ -2,40 +2,127 @@
 import { LandscapeSchema } from '@localfirstfm/landscape-schema'
 
 export const data = LandscapeSchema.make({
-	Version: 1,
-	Id: 'supersync',
-	Name: 'SuperSync',
-	Description: 'A cool way to sync data',
-	Website: 'https://supersync.cool',
-	Deployment: ['Self-hosted'],
-	License: 'MIT',
-	AppTarget: {
-		LanguageSDK: { data: ['typescript'] },
-	},
-	Networking: {
-		Topology: { data: 'Client-Server' },
-	},
-	ServerSideData: {
-		PersistenceMechanism: { data: ['N/A'] },
-		DataModelParadigm: { data: 'Relational' },
-	},
-	ClientSideData: {
-		QueryAPI: { data: ['Async'] },
-		PersistenceMechanism: { data: ['IndexedDB', 'OPFS'] },
-		PersistenceFeatures: { data: 'Indexes' },
-		DataModel: { data: 'Document' },
-		OfflineReads: { data: 'Full Support' },
-		OfflineWrites: { data: 'Local conflict resolution' },
-		DataSize: { data: 'Up to 5-10 MB per document' },
-	},
-	SynchronizationStrategy: {
-		FullOrPartialReplication: { data: ['Full Replication'] },
-		ConflictHandling: { data: 'Automatic via CRDT' },
-		WhereResolutionOccurs: { data: 'Client' },
-		WhatGetsSynced: {
-			data: {
-				ClientToClient: 'Ops',
-			},
-		},
-	},
+  Version: 1,
+  Id: 'automerge',
+  Name: 'Automerge',
+  Description: "Automerge enables local first applications by providing generic version control for JSON documents", 
+  MaturityLevel: "Production-Ready",
+  Website: 'https://automerge.org',
+  GitHub: "https://github.com/automerge/automerge",
+  GetStarted: 'https://automerge.org/docs/hello/',
+  License: 'MIT',
+  NotableAdopters: [
+    {
+      Name: "GoodNotes",
+      URL: "https://github.com/automerge/automerge",
+    },
+    {
+      Name: "Bowtie",
+      URL: "https://www.bowtie.security/",
+    }
+  ],
+  Deployment: ['Self-hosted'],
+  Networking: {
+    Topology: {
+      data: 'Topology-agnostic',
+      comment: 'Typical deployments use a central relay server with opportunistic peer-to-peer'
+    },
+    Protocol: {
+      data: ['WebSockets', 'TCP'],
+      comment: 'The Automerge sync protocol runs over anything which provides an in-order byte stream',
+    }
+  },
+  ServerSideData: {
+    PersistenceMechanism: {
+      data: [
+        'Local file system',
+        'Custom'
+      ],
+      comment: 'Automerge can use any storage mechanism which supports key/value storage with range queries. There are community maintained adapters for many storage backends including PostgreSQL and S3'
+    },
+    DataModelParadigm: {
+      data: 'Document'
+    }
+  },
+  ClientSideData: {
+    QueryAPI: {
+      data: ['Async']
+    },
+    LocalRefreshLatency: {
+      data: '~10-100ms'
+    },
+    PersistenceMechanism: {
+      data: ['IndexedDB', 'Local file system', 'Custom'],
+      comment: 'Automerge can use any storage mechanism which supports key/value storage with range queries',
+    },
+    DataModel: {
+      data: 'Document'
+    },
+    OfflineReads: {
+      data: 'Full Support'
+    },
+    OfflineWrites: {
+      data: 'Full local conflict resolution'
+    },
+    DataSize: {
+      data: 'up to 5-10mb per doc'
+    }
+  },
+  SynchronizationStrategy: {
+    FullOrPartialReplication: {
+      data: ['Full Replication']
+    },
+    ConflictHandling: {
+      data: 'Automatic via CRDT',
+      comment: 'All changes are recorded and conflicts can be examined and resolved later'
+    },
+    WhereResolutionOccurs: {
+      data: 'Client'
+    },
+    WhatGetsSynced: {
+      data: { ClientToClient: 'ops', ClientToServer: 'ops', ServerToClient: 'ops' },
+      comment: 'There is no distinction between client and server in Automerge'
+    },
+    Authority: {
+      data: 'Decentralized'
+    },
+    Latency: {
+      data: '~10-100ms',
+    }
+  },
+  AppTarget: {
+    Platform: { data: [
+      "Browser",
+      "Node",
+      "iOS",
+      "Android",
+      "macOS",
+      "Linux",
+      "Windows",
+      "WASM"
+    ], 
+      comment: "Automerge itself supports all these platforms, but the automerge-repo companion library is currently only available in JavaScript environments (excluding React Native) and Swift environments. Other platforms are in development."
+    },  
+    LanguageSDK: {
+      data: [
+        'JavaScript',
+        'TypeScript',
+        'Swift',
+        'Rust',
+        'Go',
+        'Java',
+        'Kotlin',
+      ],   
+      comment: "The officially supported languages are JavaScript, TypeScript, Swift, and Rust. Go, Java and Kotlin are best-effort but tend to lag behind the official implementations"
+    },
+    FrameworkIntegrations: {
+      data: [
+        'React',
+        'Svelte',
+      ],
+    },
+    ClientBundleSize: {
+      data: "~800Kb gzipped",
+    }
+  },
 })
