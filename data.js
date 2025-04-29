@@ -11,6 +11,7 @@ export const data = LandscapeSchema.make({
   GitHub: "https://github.com/automerge/automerge",
   GetStarted: 'https://automerge.org/docs/hello/',
   License: 'MIT',
+  InitialReleaseDate: new Date('2017-01-01'),
   NotableAdopters: [
     {
       Name: "GoodNotes",
@@ -24,7 +25,7 @@ export const data = LandscapeSchema.make({
   Deployment: ['Self-hosted'],
   Networking: {
     Topology: {
-      data: 'Topology-agnostic',
+      data: 'P2P',
       comment: 'Typical deployments use a central relay server with opportunistic peer-to-peer'
     },
     Protocol: {
@@ -62,7 +63,7 @@ export const data = LandscapeSchema.make({
       data: 'Full Support'
     },
     OfflineWrites: {
-      data: 'Full local conflict resolution'
+      data: 'Local conflict resolution'
     },
     DataSize: {
       data: 'up to 5-10mb per doc'
@@ -125,4 +126,23 @@ export const data = LandscapeSchema.make({
       data: "~800Kb gzipped",
     }
   },
+  AuthIdentity: {
+    Encryption: {
+      data: "Transport-level encryption",
+    },
+    AuthorizationPermissions: {
+      data: "Custom"
+    },
+    AuthenticationMethod: {
+      data: ["Full Custom"],
+    }
+  },
+  UIRelated: {
+    RichTextEditing: {
+      data: "Yes",
+    },
+    Components: {
+      data: ["ProseMirror plugin", "CodeMirror plugin", "React hooks"] 
+    }
+  }
 })
